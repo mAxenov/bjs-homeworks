@@ -38,7 +38,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     let amout = bodyCredit * (percentMonth + percentMonth / (((1 + percentMonth) ** month) - 1));
     let totalAmount = amout * month;
 
-    return totalAmount.toFixed(2);
+    return +totalAmount.toFixed(2);
 }
 
 function getGreeting(name) {
