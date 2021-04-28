@@ -4,14 +4,13 @@
 function parseCount(number) {
     let parseNumber = parseInt(number, 10);
     if (isNaN(parseNumber)) {
-        throw "Невалидное значение";
+        throw Error("Невалидное значение");
     }
-    return parseInt(parseNumber);
+    return parseNumber;
 }
 function validateCount(number) {
     try {
-        let num = parseCount(number);
-        return num;
+        return parseCount(number);
     } catch (err) {
         return err;
     }
@@ -19,39 +18,35 @@ function validateCount(number) {
 
 //Задание 2
 
-class Trinagle {
+class Triangle {
     constructor(a, b, c) {
         this.sideA = a;
         this.sideB = b;
         this.sideC = c;
-        if (this.sideA + this.sideB < this.sideC) {
-            throw "Треугольник с такими сторонами не существует";
-        } else if (this.sideA + this.sideC < this.sideB) {
-            throw "Треугольник с такими сторонами не существует";
-        } else if (this.sideB + this.sideC < this.sideA) {
-            throw "Треугольник с такими сторонами не существует";
+        if (a + b < c || a + c < b || b + c < a) {
+            throw Error("Треугольник с такими сторонами не существует");
         }
     }
 
     getPerimeter() {
-        const perimeter = this.sideA + this.sideB + this.sideC;
-        return perimeter;
+        return this.sideA + this.sideB + this.sideC;
     }
     getArea() {
         const p = this.getPerimeter() / 2;
         const area = Math.sqrt(p * (p - this.sideA) * (p - this.sideB) * (p - this.sideC));
-        return area.toFixed(3);
+        return +area.toFixed(3);
     }
 }
 
 function getTriangle(a, b, c) {
     try {
-        const newtriangle = new Trinagle(a, b, c);
-        return newtriangle;
-    } catch (e) {
+        return new Triangle(a, b, c);
+    } catch (error) {
         return {
-            getPerimeter: () => "Ошибка! Треугольник не существует",
-            getArea: () => "Ошибка! Треугольник не существует",
-        }
+            getArea: (e) => Error("Ошибка! Треугольник не существует"),
+            getPerimeter: (e) => Error("Ошибка! Треугольник не существует"),
+        };
+
     }
 }
+
