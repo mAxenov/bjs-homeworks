@@ -107,7 +107,8 @@ class Library {
             if (i === this.books.length) {
                 return null;
             } else if (this.books[i].name === bookName) {
-                return this.books.splice(i, 1);
+                const returnBook = this.books.slice(i, i + 1)
+                return returnBook[0];
             }
         }
     }
@@ -172,8 +173,8 @@ class StudentLog {
         let totalAvarage = 0;
         for (let prop in this.score) {
             average = average + this.getAverageBySubject(prop);
-            if (this.score[prop].length > 0) {
-                totalAvarage = average / this.score[prop].length;
+            if (Object.keys(this.score).length > 0) {
+                totalAvarage = average / Object.keys(this.score).length;
             }
         }
         return totalAvarage;
